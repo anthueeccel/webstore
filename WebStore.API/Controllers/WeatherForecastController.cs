@@ -23,4 +23,16 @@ public class WeatherForecastController : ControllerBase
 
         return result;
     }
+
+    [HttpPost("generate")]
+    public IActionResult Create([FromQuery]int totalResults, [FromBody]TemperatureRange tempRange)
+    {
+        if (totalResults < 1 || tempRange.MaxTemp <= tempRange.MinTemp)
+        {
+            return BadRequest("Error");
+        }
+
+        var result = _weatherforecastService.Create(totalResults, tempRange.MinTemp, tempRange.MaxTemp);
+        return Ok(result);
+    }
 }

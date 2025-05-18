@@ -1,6 +1,20 @@
-@WebStore.API_HostAddress = http://localhost:5144
+@WebStore.API_HostAddress = https://localhost:7020
 
-GET {{WebStore.API_HostAddress}}/api/weatherforecast/
-Accept: application/json
+GET {{WebStore.API_HostAddress}}/api/weatherforecast
+
+###
+
+@totalResults=10
+POST {{WebStore.API_HostAddress}}/api/weatherforecast/generate?totalResults={{totalResults}}
+Content-Type: application/json
+
+{  
+   "minTemp":10,
+   "maxTemp":51  
+}
+
+###
+
+GET {{WebStore.API_HostAddress}}/api/weatherforecast
 
 ###
