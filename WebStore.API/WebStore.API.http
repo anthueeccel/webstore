@@ -1,20 +1,11 @@
 @WebStore.API_HostAddress = https://localhost:7020
 
-GET {{WebStore.API_HostAddress}}/api/weatherforecast
+GET {{WebStore.API_HostAddress}}/api/webstore
 
 ###
 
-@totalResults=10
-POST {{WebStore.API_HostAddress}}/api/weatherforecast/generate?totalResults={{totalResults}}
-Content-Type: application/json
-
-{  
-   "minTemp":10,
-   "maxTemp":51  
-}
+@id = 3675cd5f-ff32-41ce-887c-88bd16bc3851
+GET {{WebStore.API_HostAddress}}/api/webstore/{{id}}
 
 ###
 
-GET {{WebStore.API_HostAddress}}/api/weatherforecast
-
-###

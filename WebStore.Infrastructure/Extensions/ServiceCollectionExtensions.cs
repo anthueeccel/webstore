@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WebStore.Domain.Repositories;
 using WebStore.Infrastructure.Persistence;
+using WebStore.Infrastructure.Repositories;
 using WebStore.Infrastructure.Seeders;
 
 namespace WebStore.Infrastructure.Extensions
@@ -14,6 +16,7 @@ namespace WebStore.Infrastructure.Extensions
             services.AddDbContext<WebStoreDbContext>(options => options.UseSqlServer(connectionString));
 
             services.AddScoped<IWebStoreSeeder, WebStoreSeeder>();
+            services.AddScoped<IWebStoreRepository, WebStoreRepository>();
         }
     }
 }
