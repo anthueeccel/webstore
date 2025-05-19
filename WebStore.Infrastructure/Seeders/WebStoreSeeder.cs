@@ -17,21 +17,24 @@ namespace WebStore.Infrastructure.Seeders
         {
             if (await _dbContext.Database.CanConnectAsync())
             {
-                if (!_dbContext.Brands.Any() && !_dbContext.Categories.Any() && !_dbContext.WebStores.Any())
+                //if (!_dbContext.Brands.Any())
+                //{
+                //    var brands = GetBrands();
+                //    _dbContext.Brands.AddRange(brands);
+                //}
+                //if (!_dbContext.Categories.Any())
+                //{
+                //    var categories = GetCategories();
+                //    _dbContext.Categories.AddRange(categories);
+                //}
+                if (!_dbContext.WebStores.Any())
                 {
-                    var brands = GetBrands();
-                    _dbContext.Brands.AddRange(brands);                
-                    
-                    var categories = GetCategories();
-                    _dbContext.Categories.AddRange(categories);                    
-                
                     var webStores = GetWebStores();
                     _dbContext.WebStores.AddRange(webStores);
-                
-                    await _dbContext.SaveChangesAsync();
                 }
+                await _dbContext.SaveChangesAsync();
             }
-        }
+        }        
 
         private IEnumerable<Brand> GetBrands()
         {
@@ -102,14 +105,13 @@ namespace WebStore.Infrastructure.Seeders
             var techHavenId = Guid.NewGuid();
             var bookNookId = Guid.NewGuid();
 
-            return
-            [
-                new Domain.Entities.WebStore
+            var webStores = new List<Domain.Entities.WebStore>
+            {
+                new() 
                 {
                     Id = techHavenId,
                     Name = "Tech Haven",
                     Description = "Your one-stop shop for the latest electronics and gadgets.",
-                    Category = electronicsCategory.Name,
                     HasDelivery = true,
                     Address = new Address
                     {
@@ -131,8 +133,8 @@ namespace WebStore.Infrastructure.Seeders
                             Name = "iPhone 15 Pro",
                             Description = "Latest Apple smartphone with advanced features.",
                             Price = 1099.99m,
-                            CategoryId = electronicsCategory.Id,
-                            BrandId = brandApple.Id,
+                            Category = electronicsCategory,
+                            Brand = brandApple,
                             Model = "A3100",
                             ImageUrl = "https://example.com/iphone15pro.jpg",
                             WebStoreId = techHavenId,
@@ -145,8 +147,8 @@ namespace WebStore.Infrastructure.Seeders
                             Name = "Sony WH-1000XM5",
                             Description = "Industry-leading noise canceling headphones.",
                             Price = 349.99m,
-                            CategoryId = electronicsCategory.Id,
-                            BrandId = brandSony.Id,
+                            Category = electronicsCategory,
+                            Brand = brandSony,
                             Model = "WH-1000XM5",
                             ImageUrl = "https://example.com/sonywh1000xm5.jpg",
                             WebStoreId = techHavenId,
@@ -160,7 +162,6 @@ namespace WebStore.Infrastructure.Seeders
                     Id = bookNookId,
                     Name = "Book Nook",
                     Description = "A cozy place for book lovers.",
-                    Category = booksCategory.Name,
                     HasDelivery = false,
                     Address = new Address
                     {
@@ -182,8 +183,8 @@ namespace WebStore.Infrastructure.Seeders
                             Name = "The Great Gatsby",
                             Description = "Classic novel by F. Scott Fitzgerald.",
                             Price = 14.99m,
-                            CategoryId = booksCategory.Id,
-                            BrandId = brandPenguin.Id,
+                            Category = booksCategory,
+                            Brand = brandPenguin,
                             Model = "Paperback",
                             ImageUrl = "https://example.com/gatsby.jpg",
                             WebStoreId = bookNookId,
@@ -196,8 +197,8 @@ namespace WebStore.Infrastructure.Seeders
                             Name = "C# in Depth",
                             Description = "Comprehensive guide to C# programming.",
                             Price = 49.99m,
-                            CategoryId = booksCategory.Id,
-                            BrandId = brandManning.Id,
+                            Category = booksCategory,
+                            Brand = brandManning,
                             Model = "4th Edition",
                             ImageUrl = "https://example.com/csharpindepth.jpg",
                             WebStoreId = bookNookId,
@@ -206,7 +207,9 @@ namespace WebStore.Infrastructure.Seeders
                         }
                     }
                 }
-            ];
+            };
+
+            return webStores;
         }
     }
 }

@@ -119,10 +119,6 @@ namespace WebStore.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ContactEmail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -157,13 +153,13 @@ namespace WebStore.Infrastructure.Migrations
 
             modelBuilder.Entity("WebStore.Domain.Entities.Product", b =>
                 {
-                    b.HasOne("WebStore.Domain.Entities.Brand", null)
+                    b.HasOne("WebStore.Domain.Entities.Brand", "Brand")
                         .WithMany("Products")
                         .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebStore.Domain.Entities.Category", null)
+                    b.HasOne("WebStore.Domain.Entities.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -174,6 +170,10 @@ namespace WebStore.Infrastructure.Migrations
                         .HasForeignKey("WebStoreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Brand");
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("WebStore.Domain.Entities.WebStore", b =>

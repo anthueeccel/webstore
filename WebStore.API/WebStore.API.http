@@ -4,7 +4,7 @@ GET {{WebStore.API_HostAddress}}/api/webstore
 
 ###
 
-@id = 3675cd5f-ff32-41ce-887c-88bd16bc3851
+@id = 96e02e86-3f2e-49c5-a09f-e5eaea370345
 GET {{WebStore.API_HostAddress}}/api/webstore/{{id}}
 
 ###
