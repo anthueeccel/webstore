@@ -17,24 +17,14 @@ namespace WebStore.Infrastructure.Seeders
         {
             if (await _dbContext.Database.CanConnectAsync())
             {
-                //if (!_dbContext.Brands.Any())
-                //{
-                //    var brands = GetBrands();
-                //    _dbContext.Brands.AddRange(brands);
-                //}
-                //if (!_dbContext.Categories.Any())
-                //{
-                //    var categories = GetCategories();
-                //    _dbContext.Categories.AddRange(categories);
-                //}
                 if (!_dbContext.WebStores.Any())
                 {
                     var webStores = GetWebStores();
                     _dbContext.WebStores.AddRange(webStores);
+                    await _dbContext.SaveChangesAsync();
                 }
-                await _dbContext.SaveChangesAsync();
             }
-        }        
+        }
 
         private IEnumerable<Brand> GetBrands()
         {
@@ -107,7 +97,7 @@ namespace WebStore.Infrastructure.Seeders
 
             var webStores = new List<Domain.Entities.WebStore>
             {
-                new() 
+                new()
                 {
                     Id = techHavenId,
                     Name = "Tech Haven",
