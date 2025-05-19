@@ -10,11 +10,11 @@ namespace WebStore.Infrastructure.Repositories
         public async Task<IEnumerable<WebStoreModel>> GetAllWebStoresAsync()
         {
             var webStores = await dbContext.WebStores
-                .Include(ws => ws.Products)
-                    .ThenInclude(p => p.Category)
-                .Include(ws => ws.Products)
-                    .ThenInclude(p => p.Brand)
-                .AsNoTracking()
+                //.Include(ws => ws.Products)
+                //    .ThenInclude(p => p.Category)
+                //.Include(ws => ws.Products)
+                //    .ThenInclude(p => p.Brand)
+                //.AsNoTracking()
                 .ToListAsync();
 
             return webStores;
