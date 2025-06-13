@@ -9,3 +9,23 @@ GET {{WebStore.API_HostAddress}}/api/webstore/{{id}}
 
 ###
 
+
+POST {{WebStore.API_HostAddress}}/api/webstore
+Content-Type: application/json
+
+{
+    "name": "New Techno Store",
+    "description": "Best place for tech lovers.",
+    "hasDelivery": true,
+    "address": {
+      "city": "Miami",
+      "street": "256 Techno St",
+      "postalCode": "99200"
+    },
+    "contactPhoneNumber": "555-8700",
+    "contactEmail": "contact@newtech.com",
+    "extraInfo": "Specializes in high technology products",
+    "websiteUrl": "https://www.newtech.com"
+}
+
+###

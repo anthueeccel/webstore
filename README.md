@@ -17,11 +17,13 @@ Project/
 ### Why does this matter?
 Modularity and the separation of concerns ensure that the code is easy to understand, test, and expand, making the system ready to evolve as business needs grow.
 
+## More Technical Information
+AutoMapper was not used here once it is going commercial. 
+
 ### Technologies Used:
 * .NET 9
 * Entity Framework
 
-## More Technical Information
 ### Main Entities
 The Entity Model maps to database tables and defines how data is organized, including properties and relationships between different data elements (entities).
 * WebStore --> model for core of the application, the register of the store containing its main data. 

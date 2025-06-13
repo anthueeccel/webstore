@@ -113,6 +113,7 @@ namespace WebStore.Infrastructure.Seeders
                     ContactPhoneNumber = "555-1234",
                     ContactEmail = "info@techhaven.com",
                     ExtraInfo = "Open 9am-9pm daily",
+                    WebsiteUrl = "https://tech-heaven.shop",
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                     Products = new List<Product>
@@ -163,6 +164,7 @@ namespace WebStore.Infrastructure.Seeders
                     ContactPhoneNumber = "555-5678",
                     ContactEmail = "contact@booknook.com",
                     ExtraInfo = "Specializes in rare and used books",
+                    WebsiteUrl = "https://www.booknook.com",
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                     Products = new List<Product>

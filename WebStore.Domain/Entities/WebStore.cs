@@ -9,6 +9,7 @@
         public string? ContactPhoneNumber { get; set; }
         public required string ContactEmail { get; set; }
         public string? ExtraInfo { get; set; }
+        public string? WebsiteUrl { get; set; }
         public List<Product>? Products { get; set; } = [];
     }
 }

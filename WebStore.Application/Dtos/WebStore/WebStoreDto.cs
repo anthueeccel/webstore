@@ -14,6 +14,7 @@ namespace WebStore.Application.Dtos.WebStore
         public string? ContactPhoneNumber { get; set; }
         public required string ContactEmail { get; set; }
         public string? ExtraInfo { get; set; }
+        public string? WebsiteUrl { get; set; }
 
         public List<ProductDto>? Products { get; set; } = [];
 
@@ -32,6 +33,7 @@ namespace WebStore.Application.Dtos.WebStore
                 ContactPhoneNumber = webStore.ContactPhoneNumber,
                 ContactEmail = webStore.ContactEmail,
                 ExtraInfo = webStore.ExtraInfo,
+                WebsiteUrl = webStore.WebsiteUrl,
                 Products = webStore.Products?.Select(ProductDto.FromEntity).ToList()
             };
         }
