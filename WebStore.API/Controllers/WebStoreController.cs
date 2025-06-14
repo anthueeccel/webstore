@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using WebStore.Application.Dtos.WebStore;
 using WebStore.Application.Helpers;
-using WebStore.Application.WebStore.Services;
+using WebStore.Application.Services.WebStore;
 
 namespace WebStore.API.Controllers
 {
@@ -34,7 +33,7 @@ namespace WebStore.API.Controllers
             var validationResult = WebStoreCreateDtoValidator.Validate(webStoreCreateDto);
             if (!validationResult.Item1)
             {
-                return BadRequest($"Web store creation failed: {validationResult.Item2}");                
+                return BadRequest($"Web store creation failed: {validationResult.Item2}");
             }
 
             var createdWebStore = await webStoreService.CreateWebStoreAsync(webStoreCreateDto);
@@ -42,8 +41,38 @@ namespace WebStore.API.Controllers
             {
                 return BadRequest("Failed to create web store.");
             }
-            
+
             return CreatedAtAction(nameof(GetById), new { id = createdWebStore.Id }, createdWebStore);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] WebStoreUpdateDto webStoreCreateDto)
+        {
+            var validationResult = WebStoreCreateDtoValidator.Validate(webStoreCreateDto);
+            if (!validationResult.Item1)
+            {
+                return BadRequest($"Web store update failed: {validationResult.Item2}");
+            }
+            var updatedWebStore = await webStoreService.UpdateWebStoreAsync(webStoreCreateDto);
+            if (updatedWebStore is null)
+            {
+                return BadRequest("Failed to update web store.");
+            }
+            return Ok(updatedWebStore);
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        {
+            var webStore = await webStoreService.GetWebStoreByIdAsync(id);
+            if (webStore is null)
+            {
+                return NotFound();
+            }
+
+            await webStoreService.DeleteWebStoreAsync(id);
+            return Ok();
         }
     }
 }

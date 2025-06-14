@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using WebStore.Application.Services.WebStore;
-using WebStore.Application.WebStore.Services;
 
 namespace WebStore.Application.Extensions
 {

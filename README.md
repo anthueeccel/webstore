@@ -18,7 +18,8 @@ Project/
 Modularity and the separation of concerns ensure that the code is easy to understand, test, and expand, making the system ready to evolve as business needs grow.
 
 ## More Technical Information
-AutoMapper was not used here once it is going commercial. 
+AutoMapper was not used here once it is going commercial.
+Entity data validations are mannually once FluentValidation is going commercial.
 
 ### Technologies Used:
 * .NET 9
@@ -34,9 +35,38 @@ The Entity Model maps to database tables and defines how data is organized, incl
 
 ### DTO - Data Transfer Object
 A DTO (Data Transfer Object) is a simple object used to transfer data between application layers. It typically holds data without business logic, acting as a container to pass information efficiently.
-* WebStoreDto
-* ProductDto
+* WebStoreDto - fetch data for http get endpoint
+* ProductDto - fetch data for http get endpoint
+* WebStoreCreateDto - Webstore posting endpoint
 
 ### Helpful CLI
 * Add nuget package: `dotnet add package <package-name>`
 * Create migrations: `dotnet ef migrations add <name>`
+
+
+### Exceptions Handled Globally
+
+public class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IExceptionHandler
+{
+public async ValueTask<bool> TryHandleAsync(
+HttpContext httpContext,
+Exception, exception,
+CanellationToken cancellationToken)
+{
+var exceptionMessage = exception.Message;
+logger.LogError(exception, "Error Message: {@ExceptionMessage}", exceptionMessage);
+
+var problemDetails = new ProblmeDetails
+{
+Status = statusCodes.Status500InternalServerError,
+Title = "Server Error: " + exceptionMessage,
+Instance = httpContext.Request.Path,
+};
+
+httpContext.Response.StatusCode = problemDetails.Status.Value;
+
+await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
+
+return true;
+}
+}

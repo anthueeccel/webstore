@@ -8,5 +8,7 @@ namespace WebStore.Domain.Repositories
         Task<IEnumerable<WebStoreModel>> GetAllWebStoresAsync();
         Task<WebStoreModel?> GetWebStoreByIdAsync(Guid id);
         Task<EntityEntry<WebStoreModel>> CreateWebStoreAsync(WebStoreModel webStore);
+        Task<EntityEntry<WebStoreModel>> UpdateWebStoreAsync(WebStoreModel webStore);
+        Task DeleteWebStoreAsync(Guid id);
     }
 }

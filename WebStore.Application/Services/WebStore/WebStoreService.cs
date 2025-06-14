@@ -1,10 +1,7 @@
 ﻿
 using Microsoft.Extensions.Logging;
 using WebStore.Application.Dtos.WebStore;
-using WebStore.Application.Helpers;
-using WebStore.Application.WebStore.Services;
 using WebStore.Domain.Repositories;
-using WebStoreModel = WebStore.Domain.Entities.WebStore;
 
 namespace WebStore.Application.Services.WebStore
 {
@@ -14,7 +11,7 @@ namespace WebStore.Application.Services.WebStore
         {
             logger.LogInformation("Creating a new web store with name {Name}.", webStoreCreateDto.Name);
             var webStore = WebStoreCreateDto.ToEntity(webStoreCreateDto);
-            
+
             logger.LogInformation("Saving web store to the repository.");
             var createdWebStore = webStoreRepository.CreateWebStoreAsync(webStore).Result;
             if (createdWebStore == null)
@@ -55,6 +52,40 @@ namespace WebStore.Application.Services.WebStore
 
             logger.LogInformation("Mapping web store to DTO.");
             return WebStoreDto.FromEntity(webStore);
+        }
+
+        public async Task<WebStoreDto?> UpdateWebStoreAsync(WebStoreUpdateDto webStoreDto)
+        {
+            logger.LogInformation("Fetching web store with ID {Id} from the repository.", webStoreDto.Id);
+            var webStore = await webStoreRepository.GetWebStoreByIdAsync(webStoreDto.Id);
+            if (webStore == null)
+            {
+                logger.LogWarning("Web store with ID {Id} not found.", webStoreDto.Id);
+                return null;
+            }
+            webStore.Name = webStoreDto.Name;
+            webStore.Description = webStoreDto.Description;
+            webStore.HasDelivery = webStoreDto.HasDelivery;
+            webStore.Address = webStoreDto.Address;
+            webStore.ContactPhoneNumber = webStoreDto.ContactPhoneNumber;
+            webStore.ContactEmail = webStoreDto.ContactEmail;
+            webStore.ExtraInfo = webStoreDto.ExtraInfo;
+            webStore.WebsiteUrl = webStoreDto.WebsiteUrl;
+            logger.LogInformation("Updating web store with ID {Id} in the repository.", webStore.Id);
+            var updatedWebStore = await webStoreRepository.UpdateWebStoreAsync(webStore);
+            if (updatedWebStore == null)
+            {
+                logger.LogWarning("Failed to update web store with ID {Id}.", webStore.Id);
+                return null;
+            }
+            logger.LogInformation("Web store with ID {Id} updated successfully.", webStore.Id);
+            return await Task.FromResult<WebStoreDto?>(WebStoreDto.FromEntity(webStore));
+        }
+
+        public Task DeleteWebStoreAsync(Guid id)
+        {
+            logger.LogInformation("Deleting web store with ID {Id}.", id);
+            return webStoreRepository.DeleteWebStoreAsync(id);
         }
     }
 }

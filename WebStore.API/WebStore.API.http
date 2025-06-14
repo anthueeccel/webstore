@@ -14,18 +14,46 @@ POST {{WebStore.API_HostAddress}}/api/webstore
 Content-Type: application/json
 
 {
-    "name": "New Techno Store",
-    "description": "Best place for tech lovers.",
-    "hasDelivery": true,
+    "name": "Night Dream BooksStore",
+    "description": "Your every night book reading.",
+    "hasDelivery": false,
     "address": {
-      "city": "Miami",
-      "street": "256 Techno St",
-      "postalCode": "99200"
+      "city": "Atlanta",
+      "street": "28 Cool Reading Rd",
+      "postalCode": "34875"
     },
-    "contactPhoneNumber": "555-8700",
-    "contactEmail": "contact@newtech.com",
-    "extraInfo": "Specializes in high technology products",
-    "websiteUrl": "https://www.newtech.com"
+    "contactPhoneNumber": "555-3366",
+    "contactEmail": "readers@ndb.shop",
+    "extraInfo": "",
+    "websiteUrl": "https://www.ndb.shop"
 }
+
+###
+
+PUT {{WebStore.API_HostAddress}}/api/webstore
+Content-Type: application/json
+
+{
+    "id": "08786b5c-d700-4fdc-a187-e06c2f156b65",
+    "name": "Night Dream BooksStore",
+    "description": "Your every night book reading.",
+    "hasDelivery": false,
+    "address": {
+      "id": "8c4a9b3c-5446-4143-b204-98ae2b9f9891",
+      "city": "Atlanta",
+      "street": "28 Cool Reading Rd",
+      "postalCode": "64887"
+    },
+    "contactPhoneNumber": "555-3366",
+    "contactEmail": "readers@ndb.shop",
+    "extraInfo": "",
+    "websiteUrl": "https://www.ndb.shop",
+    "products": []
+  }
+
+###
+
+@id = f33809e6-7183-4888-b4c3-e1d3791405f6
+DELETE {{WebStore.API_HostAddress}}/api/webstore/{{id}}
 
 ###

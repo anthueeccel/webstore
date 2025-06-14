@@ -17,7 +17,7 @@ namespace WebStore.Infrastructure.Repositories
 
         public async Task<IEnumerable<WebStoreModel>> GetAllWebStoresAsync()
         {
-            var webStores = await dbContext.WebStores            
+            var webStores = await dbContext.WebStores
                 .ToListAsync();
 
             return webStores;
@@ -33,6 +33,20 @@ namespace WebStore.Infrastructure.Repositories
                 .AsNoTracking()
                 .FirstOrDefaultAsync(w => w.Id == id);
             return webStore;
+        }
+
+        public async Task<EntityEntry<WebStoreModel>> UpdateWebStoreAsync(WebStoreModel webStore)
+        {
+            var result = dbContext.WebStores.Update(webStore);
+            await dbContext.SaveChangesAsync();
+            return result;
+        }
+
+        public async Task DeleteWebStoreAsync(Guid id)
+        {
+            var webStore = await GetWebStoreByIdAsync(id) ?? throw new KeyNotFoundException($"Web store with ID {id} not found.");
+            dbContext.WebStores.Remove(webStore);
+            await dbContext.SaveChangesAsync();
         }
     }
 }
