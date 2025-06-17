@@ -42,31 +42,3 @@ A DTO (Data Transfer Object) is a simple object used to transfer data between ap
 ### Helpful CLI
 * Add nuget package: `dotnet add package <package-name>`
 * Create migrations: `dotnet ef migrations add <name>`
-
-
-### Exceptions Handled Globally
-
-public class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IExceptionHandler
-{
-public async ValueTask<bool> TryHandleAsync(
-HttpContext httpContext,
-Exception, exception,
-CanellationToken cancellationToken)
-{
-var exceptionMessage = exception.Message;
-logger.LogError(exception, "Error Message: {@ExceptionMessage}", exceptionMessage);
-
-var problemDetails = new ProblmeDetails
-{
-Status = statusCodes.Status500InternalServerError,
-Title = "Server Error: " + exceptionMessage,
-Instance = httpContext.Request.Path,
-};
-
-httpContext.Response.StatusCode = problemDetails.Status.Value;
-
-await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
-
-return true;
-}
-}
