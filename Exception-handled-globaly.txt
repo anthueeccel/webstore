@@ -1,0 +1,25 @@
+//Exceptions Handled Globally
+public class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IExceptionHandler
+{
+    public async ValueTask<bool> TryHandleAsync(
+    HttpContext httpContext,
+    Exception, exception,
+    CanellationToken cancellationToken)
+    {
+        var exceptionMessage = exception.Message;
+        logger.LogError(exception, "Error Message: {@ExceptionMessage}", exceptionMessage);
+
+        var problemDetails = new ProblmeDetails
+        {
+            Status = statusCodes.Status500InternalServerError,
+            Title = "Server Error: " + exceptionMessage,
+            Instance = httpContext.Request.Path,
+        };
+
+        httpContext.Response.StatusCode = problemDetails.Status.Value;
+
+        await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
+
+        return true;
+    }
+}

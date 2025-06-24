@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.Extensions.Logging;
+using WebStore.Application.Dtos.Commom;
 using WebStore.Application.Dtos.WebStore;
 using WebStore.Domain.Repositories;
 
@@ -66,9 +67,9 @@ namespace WebStore.Application.Services.WebStore
             webStore.Name = webStoreDto.Name;
             webStore.Description = webStoreDto.Description;
             webStore.HasDelivery = webStoreDto.HasDelivery;
-            webStore.Address = webStoreDto.Address;
-            webStore.ContactPhoneNumber = webStoreDto.ContactPhoneNumber;
-            webStore.ContactEmail = webStoreDto.ContactEmail;
+            webStore.Address = webStoreDto?.Address?.ToEntity();
+            webStore.ContactPhoneNumber = webStoreDto?.ContactPhoneNumber;
+            webStore.ContactEmail = webStoreDto!.ContactEmail;
             webStore.ExtraInfo = webStoreDto.ExtraInfo;
             webStore.WebsiteUrl = webStoreDto.WebsiteUrl;
             logger.LogInformation("Updating web store with ID {Id} in the repository.", webStore.Id);

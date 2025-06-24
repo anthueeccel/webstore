@@ -20,7 +20,7 @@ namespace WebStore.Application.Helpers
             }
             if (string.IsNullOrWhiteSpace(webStoreCreateDto.ContactEmail) || !webStoreCreateDto.ContactEmail.Contains('@'))
             {
-                return (false, "Please provide a Web store Contact Email.");
+                return (false, "Please provide a valid Web store Contact Email.");
             }
             return (true, "WebStoreCreateDto required data is OK.");
         }

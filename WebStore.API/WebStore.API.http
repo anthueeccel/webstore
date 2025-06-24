@@ -57,3 +57,49 @@ Content-Type: application/json
 DELETE {{WebStore.API_HostAddress}}/api/webstore/{{id}}
 
 ###
+
+@webStoreId = 96e02e86-3f2e-49c5-a09f-e5eaea370345
+GET {{WebStore.API_HostAddress}}/api/product/{{webStoreId}}/products
+
+###
+
+@webStoreId = 96e02e86-3f2e-49c5-a09f-e5eaea370345
+@productId = a7fc3ddb-dcb3-457e-9063-8e88d8ba20ac
+GET {{WebStore.API_HostAddress}}/api/product/{{webStoreId}}/products/{{productId}}
+
+###
+
+@webStoreId = 96e02e86-3f2e-49c5-a09f-e5eaea370345
+POST {{WebStore.API_HostAddress}}/api/product/{{webStoreId}}/products
+Content-Type: application/json
+
+{
+  "webStoreId": "96e02e86-3f2e-49c5-a09f-e5eaea370345",
+  "name": "Honor 200",
+  "description": "New top brand for smartphones",
+  "price": 259.99,
+  "categoryId": "ab3100ea-74aa-4d04-ae76-0473dd88108c",
+  "brandId": "1d215ed0-af6f-4f59-a0a7-f08312417a03",
+  "model": "200-S7G312512",
+  "imageUrl": "https://example.com/honor200.jpg"
+}
+
+###
+
+@webStoreId = 96e02e86-3f2e-49c5-a09f-e5eaea370345
+PUT {{WebStore.API_HostAddress}}/api/product/{{webStoreId}}/products/9130e08c-820e-4698-a6ad-02ffd3be3925
+Content-Type: application/json
+
+{
+  "webStoreId": "96e02e86-3f2e-49c5-a09f-e5eaea370345",
+  "id": "9130e08c-820e-4698-a6ad-02ffd3be3925",
+  "name": "Honor 200",
+  "description": "New top brand for smartphones",
+  "price": 269.99,
+  "categoryId": "ab3100ea-74aa-4d04-ae76-0473dd88108c",
+  "brandId": "1d215ed0-af6f-4f59-a0a7-f08312417a03",
+  "model": "200-S7G312512",
+  "imageUrl": "https://example.com/honor200-200-S7G312512.jpg"
+}
+
+###

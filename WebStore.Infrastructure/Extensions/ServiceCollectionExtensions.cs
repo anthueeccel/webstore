@@ -17,6 +17,9 @@ namespace WebStore.Infrastructure.Extensions
 
             services.AddScoped<IWebStoreSeeder, WebStoreSeeder>();
             services.AddScoped<IWebStoreRepository, WebStoreRepository>();
+            services.AddScoped<IBrandRepository, BrandRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using WebStore.Domain.Entities;
+﻿using WebStore.Application.Dtos.Commom;
 using WebStoreModel = WebStore.Domain.Entities.WebStore;
 
 namespace WebStore.Application.Dtos.WebStore
@@ -8,7 +8,7 @@ namespace WebStore.Application.Dtos.WebStore
         public required string Name { get; set; }
         public required string Description { get; set; }
         public bool HasDelivery { get; set; }
-        public Address? Address { get; set; }
+        public AddressDto? Address { get; set; }
         public string? ContactPhoneNumber { get; set; }
         public required string ContactEmail { get; set; }
         public string? ExtraInfo { get; set; }
@@ -21,11 +21,11 @@ namespace WebStore.Application.Dtos.WebStore
                 Name = webStoreCreate.Name,
                 Description = webStoreCreate.Description,
                 HasDelivery = webStoreCreate.HasDelivery,
-                Address = webStoreCreate.Address,
+                Address = webStoreCreate.Address?.ToEntity(),
                 ContactPhoneNumber = webStoreCreate.ContactPhoneNumber,
                 ContactEmail = webStoreCreate.ContactEmail,
                 ExtraInfo = webStoreCreate.ExtraInfo,
-                WebsiteUrl = webStoreCreate.WebsiteUrl                
+                WebsiteUrl = webStoreCreate.WebsiteUrl
             };
         }
     }
