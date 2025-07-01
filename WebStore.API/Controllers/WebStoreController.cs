@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebStore.Application.Dtos.WebStore;
-using WebStore.Application.Helpers;
 using WebStore.Application.Services.WebStore;
 
 namespace WebStore.API.Controllers
@@ -30,12 +29,6 @@ namespace WebStore.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] WebStoreCreateDto webStoreCreateDto)
         {
-            var validationResult = WebStoreCreateDtoValidator.Validate(webStoreCreateDto);
-            if (!validationResult.Item1)
-            {
-                return BadRequest($"Web store creation failed: {validationResult.Item2}");
-            }
-
             var createdWebStore = await webStoreService.CreateWebStoreAsync(webStoreCreateDto);
             if (createdWebStore is null)
             {
@@ -47,12 +40,7 @@ namespace WebStore.API.Controllers
 
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] WebStoreUpdateDto webStoreCreateDto)
-        {
-            var validationResult = WebStoreCreateDtoValidator.Validate(webStoreCreateDto);
-            if (!validationResult.Item1)
-            {
-                return BadRequest($"Web store update failed: {validationResult.Item2}");
-            }
+        {            
             var updatedWebStore = await webStoreService.UpdateWebStoreAsync(webStoreCreateDto);
             if (updatedWebStore is null)
             {

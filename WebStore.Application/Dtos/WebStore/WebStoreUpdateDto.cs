@@ -2,6 +2,6 @@
 {
     public class WebStoreUpdateDto : WebStoreCreateDto
     {
-        public Guid Id { get; set; }
+        public required Guid Id { get; set; }
     }
 }

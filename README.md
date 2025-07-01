@@ -17,13 +17,10 @@ Project/
 ### Why does this matter?
 Modularity and the separation of concerns ensure that the code is easy to understand, test, and expand, making the system ready to evolve as business needs grow.
 
-## More Technical Information
-AutoMapper was not used here once it is going commercial.
-Entity data validations are mannually once FluentValidation is going commercial.
-
 ### Technologies Used:
 * .NET 9
 * Entity Framework
+* FluentValidation
 
 ### Main Entities
 The Entity Model maps to database tables and defines how data is organized, including properties and relationships between different data elements (entities).
@@ -38,6 +35,10 @@ A DTO (Data Transfer Object) is a simple object used to transfer data between ap
 * WebStoreDto - fetch data for http get endpoint
 * ProductDto - fetch data for http get endpoint
 * WebStoreCreateDto - Webstore posting endpoint
+* ProductCreateDto - Product posting endpoint
+
+## More Technical Information
+AutoMapper was not used here once it is going commercial.
 
 ### Helpful CLI
 * Add nuget package: `dotnet add package <package-name>`

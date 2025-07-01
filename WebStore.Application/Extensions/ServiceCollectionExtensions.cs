@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.Extensions.DependencyInjection;
 using WebStore.Application.Services.Product;
 using WebStore.Application.Services.WebStore;
 
@@ -10,6 +12,9 @@ namespace WebStore.Application.Extensions
         {
             services.AddScoped<IWebStoreService, WebStoreService>();
             services.AddScoped<IProductService, ProductService>();
+
+            services.AddValidatorsFromAssembly(typeof(ServiceCollectionExtensions).Assembly)
+                .AddFluentValidationAutoValidation();
         }
     }
 }

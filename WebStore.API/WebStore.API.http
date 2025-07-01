@@ -14,18 +14,18 @@ POST {{WebStore.API_HostAddress}}/api/webstore
 Content-Type: application/json
 
 {
-    "name": "Night Dream BooksStore",
-    "description": "Your every night book reading.",
+    "name": "Book Dream Book Store",
+    "description": "The New book store in the city.",
     "hasDelivery": false,
     "address": {
-      "city": "Atlanta",
-      "street": "28 Cool Reading Rd",
-      "postalCode": "34875"
+      "city": "Los Angeles",
+      "street": "1 Reading St",
+      "postalCode": "84987"
     },
-    "contactPhoneNumber": "555-3366",
-    "contactEmail": "readers@ndb.shop",
+    "contactPhoneNumber": "5558877",
+    "contactEmail": "readers@new book.shop",
     "extraInfo": "",
-    "websiteUrl": "https://www.ndb.shop"
+    "websiteUrl": "https://www.newbook.shop"
 }
 
 ###
@@ -34,20 +34,20 @@ PUT {{WebStore.API_HostAddress}}/api/webstore
 Content-Type: application/json
 
 {
-    "id": "08786b5c-d700-4fdc-a187-e06c2f156b65",
-    "name": "Night Dream BooksStore",
-    "description": "Your every night book reading.",
+    "id": "01a17888-7ef0-4831-a30c-cfe8d70cee3c",
+    "name": "My Dream Book Store",
+    "description": "My lovely book store in LA.",
     "hasDelivery": false,
     "address": {
       "id": "8c4a9b3c-5446-4143-b204-98ae2b9f9891",
-      "city": "Atlanta",
-      "street": "28 Cool Reading Rd",
-      "postalCode": "64887"
+      "city": "Los Angeles",
+      "street": "11 Reading Rd",
+      "postalCode": "97555"
     },
-    "contactPhoneNumber": "555-3366",
-    "contactEmail": "readers@ndb.shop",
+    "contactPhoneNumber": "5553162",
+    "contactEmail": "readers@mydreambook.shop",
     "extraInfo": "",
-    "websiteUrl": "https://www.ndb.shop",
+    "websiteUrl": "https://www.mydreambook.shop",
     "products": []
   }
 
@@ -75,13 +75,13 @@ Content-Type: application/json
 
 {
   "webStoreId": "96e02e86-3f2e-49c5-a09f-e5eaea370345",
-  "name": "Honor 200",
-  "description": "New top brand for smartphones",
-  "price": 259.99,
+  "name": "Razor Double 25S 5G",
+  "description": "Two displays for maximum performance, same Sony quality",
+  "price": 529.99,
   "categoryId": "ab3100ea-74aa-4d04-ae76-0473dd88108c",
   "brandId": "1d215ed0-af6f-4f59-a0a7-f08312417a03",
-  "model": "200-S7G312512",
-  "imageUrl": "https://example.com/honor200.jpg"
+  "model": "RD25Snap5G",
+  "imageUrl": "https://example.com/razor-double-display.jpg"
 }
 
 ###
@@ -99,7 +99,7 @@ Content-Type: application/json
   "categoryId": "ab3100ea-74aa-4d04-ae76-0473dd88108c",
   "brandId": "1d215ed0-af6f-4f59-a0a7-f08312417a03",
   "model": "200-S7G312512",
-  "imageUrl": "https://example.com/honor200-200-S7G312512.jpg"
+  "imageUrl": "https://images.com/honor-200-S7G312515.png"
 }
 
 ###

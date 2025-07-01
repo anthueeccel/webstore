@@ -22,10 +22,10 @@ namespace WebStore.Application.Dtos.WebStore
                 Description = webStoreCreate.Description,
                 HasDelivery = webStoreCreate.HasDelivery,
                 Address = webStoreCreate.Address?.ToEntity(),
-                ContactPhoneNumber = webStoreCreate.ContactPhoneNumber,
-                ContactEmail = webStoreCreate.ContactEmail,
+                ContactPhoneNumber = webStoreCreate.ContactPhoneNumber?.Trim(),
+                ContactEmail = webStoreCreate.ContactEmail.Trim(),
                 ExtraInfo = webStoreCreate.ExtraInfo,
-                WebsiteUrl = webStoreCreate.WebsiteUrl
+                WebsiteUrl = webStoreCreate.WebsiteUrl?.Trim()
             };
         }
     }
