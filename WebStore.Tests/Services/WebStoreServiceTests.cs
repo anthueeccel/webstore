@@ -1,9 +1,6 @@
 using Microsoft.Extensions.Logging;
-using Moq;
-using WebStore.Application.Dtos.Commom;
 using WebStore.Application.Dtos.WebStore;
 using WebStore.Application.Services.WebStore;
-using WebStore.Domain.Entities;
 using WebStore.Domain.Repositories;
 using WebStoreEntity = WebStore.Domain.Entities.WebStore;
 
