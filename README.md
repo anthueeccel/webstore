@@ -1,10 +1,13 @@
-![.Net](http://img.shields.io/badge/-9-008999?style=flat-square&logo=.net&logoColor=ffffff) ![last_commit](https://img.shields.io/github/last-commit/anthueeccel/webstore) ![license](https://img.shields.io/github/license/anthueeccel/webstore)
+![.Net](http://img.shields.io/badge/-v10.0-008999?style=flat-square&logo=.net&logoColor=ffffff) ![last_commit](https://img.shields.io/github/last-commit/anthueeccel/webstore) ![license](https://img.shields.io/github/license/anthueeccel/webstore)
 
 ## Overview
 WebStore Management Tool
 
 ## Clean Architecture
 This API follows the principles of Clean Architecture to ensure it is modular, testable, and scalable.
+
+#### Design Patterns
+CQRS (Command Query Responsibility Segregation): The application implements the CQRS pattern using MediatR to decouple read and write operations. This ensures that the application layer remains clean and that business logic is encapsulated within specific Commands and Queries.
 
 ```
 Project/
@@ -34,6 +37,7 @@ Modularity and the separation of concerns ensure that the code is easy to unders
 * .NET 10
 * Entity Framework
 * FluentValidation
+* MediatR
 
 ### Main Entities
 The Entity Model maps to database tables and defines how data is organized, including properties and relationships between different data elements (entities).
@@ -43,7 +47,7 @@ The Entity Model maps to database tables and defines how data is organized, incl
 * Brand --> brand of the product
 * Category --> category of the product
 
-### DTO - Data Transfer Object (record class due to 
+### DTO - Data Transfer Object
 A DTO (Data Transfer Object) is a simple object used to transfer data between application layers. It typically holds data without business logic, acting as a container to pass information efficiently.
 * WebStoreDto - fetch data for http get endpoint
 * ProductDto - fetch data for http get endpoint
@@ -51,9 +55,6 @@ A DTO (Data Transfer Object) is a simple object used to transfer data between ap
 * ProductCreateDto - Product posting endpoint
 * WebStoreUpdateDto - Webstore updating endpoint
 * ProductUpdateDto - Product updating endpoint
-
-
-## More Technical Information
 
 
 ### Helpful CLI
