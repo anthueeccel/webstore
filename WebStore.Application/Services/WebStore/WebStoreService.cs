@@ -6,7 +6,7 @@ using WebStore.Domain.Repositories;
 
 namespace WebStore.Application.Services.WebStore
 {
-    internal class WebStoreService(IWebStoreRepository webStoreRepository, ILogger<WebStoreService> logger) : IWebStoreService
+    public class WebStoreService(IWebStoreRepository webStoreRepository, ILogger<WebStoreService> logger) : IWebStoreService
     {
         public Task<WebStoreDto?> CreateWebStoreAsync(WebStoreCreateDto webStoreCreateDto)
         {

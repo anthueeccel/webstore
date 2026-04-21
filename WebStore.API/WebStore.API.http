@@ -4,7 +4,7 @@ GET {{WebStore.API_HostAddress}}/api/webstore
 
 ###
 
-@id = 14cd256a-4e31-454f-8942-a822d26629ba
+@id = 96e02e86-3f2e-49c5-a09f-e5eaea370345
 GET {{WebStore.API_HostAddress}}/api/webstore/{{id}}
 
 ###
@@ -53,7 +53,7 @@ Content-Type: application/json
 
 ###
 
-@id = f33809e6-7183-4888-b4c3-e1d3791405f6
+@id = 0f54709b-604b-4985-b49c-adac8a4c4cb0
 DELETE {{WebStore.API_HostAddress}}/api/webstore/{{id}}
 
 ###
