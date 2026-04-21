@@ -4,7 +4,7 @@ GET {{WebStore.API_HostAddress}}/api/webstore
 
 ###
 
-@id = 96e02e86-3f2e-49c5-a09f-e5eaea370345
+@id = 14cd256a-4e31-454f-8942-a822d26629ba
 GET {{WebStore.API_HostAddress}}/api/webstore/{{id}}
 
 ###
@@ -75,9 +75,9 @@ Content-Type: application/json
 
 {
   "webStoreId": "96e02e86-3f2e-49c5-a09f-e5eaea370345",
-  "name": "Razor Double 25S 5G",
+  "name": "Razor Double 25S 5G Gold Edition",
   "description": "Two displays for maximum performance, same Sony quality",
-  "price": 529.99,
+  "price": 539.99,
   "categoryId": "ab3100ea-74aa-4d04-ae76-0473dd88108c",
   "brandId": "1d215ed0-af6f-4f59-a0a7-f08312417a03",
   "model": "RD25Snap5G",

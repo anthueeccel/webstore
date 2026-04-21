@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
 using WebStore.Application.Dtos.Commom;
 
-namespace WebStore.Application.Dtos.Validators
+namespace WebStore.Application.Commands
 {
-    public class AddressDtoValidator : AbstractValidator<AddressDto>
+    public class AddressValidator : AbstractValidator<AddressDto>
     {
-        public AddressDtoValidator()
+        public AddressValidator()
         {
             RuleFor(dto => dto.Street)
                 .Length(5, 100).WithMessage("Street must be between 5 and 100 characters.");

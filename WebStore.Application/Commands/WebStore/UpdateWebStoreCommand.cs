@@ -1,16 +1,23 @@
-﻿namespace WebStore.Domain.Entities
+﻿using MediatR;
+
+namespace WebStore.Application.Commands.WebStore
 {
-    public class WebStore : BaseEntity
+    public class UpdateWebStoreCommand : IRequest<Guid>
     {
-        // e.g., WebStoreModel.CreateNew(name, description, ..., address)
+        public required Guid Id { get; set; }
         public required string Name { get; set; }
         public required string Description { get; set; }
         public bool HasDelivery { get; set; }
-        public Address? Address { get; set; }
+        public required AddressCommand Address { get; set; }
         public string? ContactPhoneNumber { get; set; }
         public required string ContactEmail { get; set; }
         public string? ExtraInfo { get; set; }
         public string? WebsiteUrl { get; set; }
-        public List<Product>? Products { get; set; } = [];
+
+        public record AddressCommand(
+            string? City,
+            string? Street,
+            string? PostalCode
+         );
     }
 }

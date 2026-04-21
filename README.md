@@ -8,17 +8,30 @@ This API follows the principles of Clean Architecture to ensure it is modular, t
 
 ```
 Project/
+├── API/    
+│   └── Controllers/
+├── Application/
+│   ├── Commands/
+│	├── Dtos/
+│	├── Extensions/
+│   └── Services/
 ├── Domain/
-└── Application/
-    ├── Infraestructure/
-    └── API/
+│	├── Entities/
+│	└── Repositories/ (interfaces)
+├── Infrastructure/
+│   ├── Extensions/
+│	├── Migrations/
+│	├── Persistence/
+│	├── Repositories/
+│   └── Seeders/
+└── Tests/    
 ```
 
 ### Why does this matter?
 Modularity and the separation of concerns ensure that the code is easy to understand, test, and expand, making the system ready to evolve as business needs grow.
 
 ### Technologies Used:
-* .NET 9
+* .NET 10
 * Entity Framework
 * FluentValidation
 
@@ -30,15 +43,18 @@ The Entity Model maps to database tables and defines how data is organized, incl
 * Brand --> brand of the product
 * Category --> category of the product
 
-### DTO - Data Transfer Object
+### DTO - Data Transfer Object (record class due to 
 A DTO (Data Transfer Object) is a simple object used to transfer data between application layers. It typically holds data without business logic, acting as a container to pass information efficiently.
 * WebStoreDto - fetch data for http get endpoint
 * ProductDto - fetch data for http get endpoint
 * WebStoreCreateDto - Webstore posting endpoint
 * ProductCreateDto - Product posting endpoint
+* WebStoreUpdateDto - Webstore updating endpoint
+* ProductUpdateDto - Product updating endpoint
+
 
 ## More Technical Information
-AutoMapper was not used here once it is going commercial.
+
 
 ### Helpful CLI
 * Add nuget package: `dotnet add package <package-name>`

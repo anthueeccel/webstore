@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using WebStore.Domain.Repositories;
 using WebStore.Infrastructure.Persistence;
 using WebStoreModel = WebStore.Domain.Entities.WebStore;
@@ -8,11 +7,11 @@ namespace WebStore.Infrastructure.Repositories
 {
     internal class WebStoreRepository(WebStoreDbContext dbContext) : IWebStoreRepository
     {
-        public async Task<EntityEntry<WebStoreModel>> CreateWebStoreAsync(WebStoreModel webStore)
+        public async Task<WebStoreModel> CreateWebStoreAsync(WebStoreModel webStore)
         {
             var result = await dbContext.WebStores.AddAsync(webStore);
             await dbContext.SaveChangesAsync();
-            return result;
+            return result.Entity;
         }
 
         public async Task<IEnumerable<WebStoreModel>> GetAllWebStoresAsync()
@@ -35,11 +34,11 @@ namespace WebStore.Infrastructure.Repositories
             return webStore;
         }
 
-        public async Task<EntityEntry<WebStoreModel>> UpdateWebStoreAsync(WebStoreModel webStore)
+        public async Task<WebStoreModel> UpdateWebStoreAsync(WebStoreModel webStore)
         {
             var result = dbContext.WebStores.Update(webStore);
             await dbContext.SaveChangesAsync();
-            return result;
+            return result.Entity;
         }
 
         public async Task DeleteWebStoreAsync(Guid id)

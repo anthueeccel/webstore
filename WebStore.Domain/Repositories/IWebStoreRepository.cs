@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
-using WebStoreModel = WebStore.Domain.Entities.WebStore;
+﻿using WebStoreModel = WebStore.Domain.Entities.WebStore;
 
 namespace WebStore.Domain.Repositories
 {
@@ -7,8 +6,8 @@ namespace WebStore.Domain.Repositories
     {
         Task<IEnumerable<WebStoreModel>> GetAllWebStoresAsync();
         Task<WebStoreModel?> GetWebStoreByIdAsync(Guid id);
-        Task<EntityEntry<WebStoreModel>> CreateWebStoreAsync(WebStoreModel webStore);
-        Task<EntityEntry<WebStoreModel>> UpdateWebStoreAsync(WebStoreModel webStore);
+        Task<WebStoreModel> CreateWebStoreAsync(WebStoreModel webStore);
+        Task<WebStoreModel> UpdateWebStoreAsync(WebStoreModel webStore);
         Task DeleteWebStoreAsync(Guid id);
     }
 }

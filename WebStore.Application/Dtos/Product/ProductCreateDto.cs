@@ -2,7 +2,7 @@
 
 namespace WebStore.Application.Dtos.Product
 {
-    public class ProductCreateDto
+    public record ProductCreateDto
     {
         public required string Name { get; set; }
         public string? Description { get; set; }

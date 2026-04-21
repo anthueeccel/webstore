@@ -1,11 +1,10 @@
 ﻿using FluentValidation;
-using WebStore.Application.Dtos.WebStore;
 
-namespace WebStore.Application.Dtos.Validators
+namespace WebStore.Application.Commands.WebStore
 {
-    public class WebStoreUpdateDtoValidator : AbstractValidator<WebStoreUpdateDto>
+    public class UpdateWebStoreCommandValidator : AbstractValidator<UpdateWebStoreCommand>
     {
-        public WebStoreUpdateDtoValidator()
+        public UpdateWebStoreCommandValidator()
         {
             RuleFor(dto => dto.Id)
                 .Must(id => id != Guid.Empty).WithMessage("Web store Id must be a valid GUID.");

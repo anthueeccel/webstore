@@ -12,19 +12,32 @@ namespace WebStore.Application.Services.Product
     {
         public Task<ProductDto?> CreateProductAsync(Guid webStoreId, ProductCreateDto productCreateDto)
         {
-            logger.LogInformation("Creating a new Product with name {Name}.", productCreateDto.Name);
-            var product = ProductCreateDto.ToEntity(brandRepository, categoryRepository, productCreateDto);
-            product!.WebStoreId = webStoreId;
+            return productRepository.GetAllProductsFromWebStoreAsync(webStoreId)
+                .ContinueWith(async productsTask =>
+                {
+                    // Check if the product name already exists in the WebStore using HashTable
+                    var products = await productsTask;
+                    var nameTable = new HashSet<string>(products.Where(p => p != null).Select(p => p.Name));
+                    if (nameTable.Contains(productCreateDto.Name))
+                    {
+                        logger.LogWarning("Product with name {Name} already exists in the WebStore.", productCreateDto.Name);
+                        return (ProductDto?)null;
+                    }
 
-            logger.LogInformation("Saving Product to the repository.");
-            var createdProduct = productRepository.CreateProductAsync(product).Result;
-            if (createdProduct == null)
-            {
-                logger.LogWarning("Failed to create Product.");
-                return Task.FromResult<ProductDto?>(null);
-            }
-            logger.LogInformation("Product created successfully with ID {Id}.", product.Id);
-            return Task.FromResult<ProductDto?>(ProductDto.FromEntity(product));
+                    logger.LogInformation("Creating a new Product with name {Name}.", productCreateDto.Name);
+                    var product = ProductCreateDto.ToEntity(brandRepository, categoryRepository, productCreateDto);
+                    product!.WebStoreId = webStoreId;
+
+                    logger.LogInformation("Saving Product to the repository.");
+                    var createdProduct = await productRepository.CreateProductAsync(product);
+                    if (createdProduct == null)
+                    {
+                        logger.LogWarning("Failed to create Product.");
+                        return (ProductDto?)null;
+                    }
+                    logger.LogInformation("Product created successfully with ID {Id}.", product.Id);
+                    return ProductDto.FromEntity(product);
+                }).Unwrap();
         }
 
         public async Task<IEnumerable<ProductDto?>> GetAllProductsFromWebStoreAsync(Guid webStoreId)

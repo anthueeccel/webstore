@@ -1,6 +1,6 @@
 ﻿namespace WebStore.Application.Dtos.Commom
 {
-    public class BrandDto
+    public record BrandDto
     {
         public required Guid Id { get; set; }
     }

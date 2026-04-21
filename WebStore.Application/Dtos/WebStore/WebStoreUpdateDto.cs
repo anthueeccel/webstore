@@ -1,7 +1,7 @@
 ﻿namespace WebStore.Application.Dtos.WebStore
 {
-    public class WebStoreUpdateDto : WebStoreCreateDto
+    public record WebStoreUpdateDto : WebStoreCreateDto
     {
-        public required Guid Id { get; set; }
+        public required Guid Id { get; init; }
     }
 }

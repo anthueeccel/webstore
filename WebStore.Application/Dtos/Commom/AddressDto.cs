@@ -2,25 +2,30 @@
 
 namespace WebStore.Application.Dtos.Commom
 {
-    public class AddressDto
+    public record AddressDto
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
-        public string? City { get; set; }
-        public string? Street { get; set; }
-        public string? PostalCode { get; set; }
+        public Guid Id { get; init; }
+        public string City { get; init; }
+        public string Street { get; init; }
+        public string PostalCode { get; init; }
+
+        public AddressDto(string city, string street, string postalCode)
+        {
+            Id = Guid.NewGuid();
+            City = city;
+            Street = street;
+            PostalCode = postalCode;
+        }
     }
 
     public static class AddressDtoExtensions
     {
-        public static Address ToEntity(this AddressDto addressDto)
+        public static Address ToEntity(this AddressDto addressDto) => new()
         {
-            return new Address
-            {
-                Id = addressDto.Id,
-                City = addressDto.City,
-                Street = addressDto.Street,
-                PostalCode = addressDto.PostalCode
-            };
-        }
+            Id = addressDto.Id,
+            City = addressDto.City,
+            Street = addressDto.Street,
+            PostalCode = addressDto.PostalCode
+        };
     }
 }

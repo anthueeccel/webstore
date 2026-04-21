@@ -4,17 +4,17 @@ using WebStoreModel = WebStore.Domain.Entities.WebStore;
 
 namespace WebStore.Application.Dtos.WebStore
 {
-    public class WebStoreDto
+    public record WebStoreDto
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
-        public required string Name { get; set; }
-        public required string Description { get; set; }
-        public bool HasDelivery { get; set; }
-        public Address? Address { get; set; }
-        public string? ContactPhoneNumber { get; set; }
-        public required string ContactEmail { get; set; }
-        public string? ExtraInfo { get; set; }
-        public string? WebsiteUrl { get; set; }
+        public Guid Id { get; init; } = Guid.NewGuid();
+        public required string Name { get; init; }
+        public required string Description { get; init; }
+        public bool HasDelivery { get; init; }
+        public Address? Address { get; init; }
+        public string? ContactPhoneNumber { get; init; }
+        public required string ContactEmail { get; init; }
+        public string? ExtraInfo { get; init; }
+        public string? WebsiteUrl { get; init; }
 
         public List<ProductDto>? Products { get; set; } = [];
 
@@ -23,7 +23,7 @@ namespace WebStore.Application.Dtos.WebStore
             if (webStore == null)
                 return null;
 
-            return new WebStoreDto
+            return new()
             {
                 Id = webStore.Id,
                 Name = webStore.Name,

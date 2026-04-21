@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="WebStore.API/WebStore.API.csproj" />
+  <Project Path="WebStore.Application/WebStore.Application.csproj" />
+  <Project Path="WebStore.Domain/WebStore.Domain.csproj" />
+  <Project Path="WebStore.Infrastructure/WebStore.Infrastructure.csproj" />
+  <Project Path="WebStore.Tests/WebStore.Tests.csproj" />
+</Solution>

@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
 using WebStore.Application.Dtos.Product;
 
-namespace WebStore.Application.Dtos.Validators
+namespace WebStore.Application.Commands.Product
 {
-    public class ProductUpdateDtoValidator : AbstractValidator<ProductUpdateDto>
+    public class UpdateProductCommandValidator : AbstractValidator<ProductUpdateDto>
     {
-        public ProductUpdateDtoValidator()
+        public UpdateProductCommandValidator()
         {
             RuleFor(dto => dto.Id)
                 .NotEmpty().WithMessage("Product Id is required.")

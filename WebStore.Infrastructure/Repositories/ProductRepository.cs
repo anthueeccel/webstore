@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using WebStore.Domain.Entities;
 using WebStore.Domain.Repositories;
 using WebStore.Infrastructure.Persistence;
@@ -8,11 +7,11 @@ namespace WebStore.Infrastructure.Repositories
 {
     internal class ProductRepository(WebStoreDbContext dbContext) : IProductRepository
     {
-        public async Task<EntityEntry<Product>> CreateProductAsync(Product product)
+        public async Task<Product> CreateProductAsync(Product product)
         {
             var result = await dbContext.Products.AddAsync(product);
             await dbContext.SaveChangesAsync();
-            return result;
+            return result.Entity;
         }
 
         public async Task<IEnumerable<Product>> GetAllProductsFromWebStoreAsync(Guid webStoreId)
@@ -36,11 +35,11 @@ namespace WebStore.Infrastructure.Repositories
             return product;
         }
 
-        public async Task<EntityEntry<Product>> UpdateProductAsync(Product product)
+        public async Task<Product> UpdateProductAsync(Product product)
         {
             var result = dbContext.Products.Update(product);
             await dbContext.SaveChangesAsync();
-            return result;
+            return result.Entity;
         }
 
         public async Task DeleteProductAsync(Guid id)
