@@ -1,8 +1,7 @@
 ![.Net](http://img.shields.io/badge/-v10.0-008999?style=flat-square&logo=.net&logoColor=ffffff) ![last_commit](https://img.shields.io/github/last-commit/anthueeccel/webstore) ![license](https://img.shields.io/github/license/anthueeccel/webstore)
 
 ## Overview
-WebStore Management Tool (back-end)
-Using Github Actions to perform validations and run the tests.
+WebStore Management Tool (back-end).
 
 ### Clean Architecture
 This API follows the principles of Clean Architecture to ensure it is modular, testable, and scalable.
@@ -34,7 +33,7 @@ Project/
 #### Why does this matter?
 Modularity and the separation of concerns ensure that the code is easy to understand, test, and expand, making the system ready to evolve as business needs grow.
 
-## Technologies Used:
+## Technologies
 * .NET 10
 * Entity Framework
 * FluentValidation
@@ -56,6 +55,10 @@ A DTO (Data Transfer Object) is a simple object used to transfer data between ap
 * `ProductCreateDto` - Product posting endpoint
 * `WebStoreUpdateDto` - Webstore updating endpoint
 * `ProductUpdateDto` - Product updating endpoint
+
+## Tools
+* Github Actions to perform validations and run the tests.
+* Visual Studio 2026
 
 ## Helpful CLI
 * Add nuget package: `dotnet add package <package-name>`

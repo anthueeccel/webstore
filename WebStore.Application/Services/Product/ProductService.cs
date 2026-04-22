@@ -4,7 +4,7 @@ using WebStore.Domain.Repositories;
 
 namespace WebStore.Application.Services.Product
 {
-    internal class ProductService(
+    public class ProductService(
         IProductRepository productRepository,
         IBrandRepository brandRepository,
         ICategoryRepository categoryRepository,
