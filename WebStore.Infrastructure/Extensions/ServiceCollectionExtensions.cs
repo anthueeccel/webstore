@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WebStore.Domain.Repositories;
 using WebStore.Infrastructure.Persistence;
-using WebStore.Infrastructure.Repositories;
 using WebStore.Infrastructure.Seeders;
 
 namespace WebStore.Infrastructure.Extensions
@@ -13,13 +11,11 @@ namespace WebStore.Infrastructure.Extensions
         public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("WebStoreLocalDb");
-            services.AddDbContext<WebStoreDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<WebStoreDbContext>(options =>
+                options.UseSqlServer(connectionString, b => b.MigrationsAssembly("WebStore.Infrastructure"))
+            );
 
             services.AddScoped<IWebStoreSeeder, WebStoreSeeder>();
-            services.AddScoped<IWebStoreRepository, WebStoreRepository>();
-            services.AddScoped<IBrandRepository, BrandRepository>();
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<IProductRepository, ProductRepository>();
         }
     }
 }

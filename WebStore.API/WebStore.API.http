@@ -1,16 +1,15 @@
-@WebStore.API_HostAddress = https://localhost:7020
+@WebStore.API_HostAddress = https://localhost:5144
 
-GET {{WebStore.API_HostAddress}}/api/webstore
+GET {{WebStore.API_HostAddress}}/api/webstores
 
 ###
 
 @id = 96e02e86-3f2e-49c5-a09f-e5eaea370345
-GET {{WebStore.API_HostAddress}}/api/webstore/{{id}}
+GET {{WebStore.API_HostAddress}}/api/webstores/{{id}}
 
 ###
 
-
-POST {{WebStore.API_HostAddress}}/api/webstore
+POST {{WebStore.API_HostAddress}}/api/webstores
 Content-Type: application/json
 
 {
@@ -23,14 +22,15 @@ Content-Type: application/json
       "postalCode": "84987"
     },
     "contactPhoneNumber": "5558877",
-    "contactEmail": "readers@new book.shop",
+    "contactEmail": "readers@newbook.shop",
     "extraInfo": "",
     "websiteUrl": "https://www.newbook.shop"
 }
 
 ###
 
-PUT {{WebStore.API_HostAddress}}/api/webstore
+@id = 01a17888-7ef0-4831-a30c-cfe8d70cee3c
+PUT {{WebStore.API_HostAddress}}/api/webstores/{{id}}
 Content-Type: application/json
 
 {
@@ -54,23 +54,23 @@ Content-Type: application/json
 ###
 
 @id = 0f54709b-604b-4985-b49c-adac8a4c4cb0
-DELETE {{WebStore.API_HostAddress}}/api/webstore/{{id}}
+DELETE {{WebStore.API_HostAddress}}/api/webstores/{{id}}
 
 ###
 
 @webStoreId = 96e02e86-3f2e-49c5-a09f-e5eaea370345
-GET {{WebStore.API_HostAddress}}/api/product/{{webStoreId}}/products
+GET {{WebStore.API_HostAddress}}/api/webstores/{{webStoreId}}/products
 
 ###
 
 @webStoreId = 96e02e86-3f2e-49c5-a09f-e5eaea370345
 @productId = a7fc3ddb-dcb3-457e-9063-8e88d8ba20ac
-GET {{WebStore.API_HostAddress}}/api/product/{{webStoreId}}/products/{{productId}}
+GET {{WebStore.API_HostAddress}}/api/products/{{productId}}
 
 ###
 
 @webStoreId = 96e02e86-3f2e-49c5-a09f-e5eaea370345
-POST {{WebStore.API_HostAddress}}/api/product/{{webStoreId}}/products
+POST {{WebStore.API_HostAddress}}/api/products
 Content-Type: application/json
 
 {
@@ -87,7 +87,8 @@ Content-Type: application/json
 ###
 
 @webStoreId = 96e02e86-3f2e-49c5-a09f-e5eaea370345
-PUT {{WebStore.API_HostAddress}}/api/product/{{webStoreId}}/products/9130e08c-820e-4698-a6ad-02ffd3be3925
+@productId = 9130e08c-820e-4698-a6ad-02ffd3be3925
+PUT {{WebStore.API_HostAddress}}/api/products/{{productId}}
 Content-Type: application/json
 
 {
@@ -103,3 +104,25 @@ Content-Type: application/json
 }
 
 ###
+
+@webStoreId = 96e02e86-3f2e-49c5-a09f-e5eaea370345
+@productId = 9130e08c-820e-4698-a6ad-02ffd3be3925
+DELETE {{WebStore.API_HostAddress}}/api/products/{{productId}}
+
+###
+
+GET {{WebStore.API_HostAddress}}/api/categories
+
+###
+
+@categoryId = ab3100ea-74aa-4d04-ae76-0473dd88108c
+GET {{WebStore.API_HostAddress}}/api/categories/{{categoryId}}
+
+###
+
+GET {{WebStore.API_HostAddress}}/api/brands
+
+###
+
+@brandId = 1d215ed0-af6f-4f59-a0a7-f08312417a03
+GET {{WebStore.API_HostAddress}}/api/brands/{{brandId}}
