@@ -12,8 +12,17 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest    
 
+    services:
+      sql:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        env:
+          ACCEPT_EULA: Y
+          MSSQL_SA_PASSWORD: ${{ secrets.MSSQL_SA_PASSWORD }}
+        ports:
+          - 1433:1433
+    
     steps:
     - uses: actions/checkout@v5
     - run: ls -R
@@ -27,3 +36,5 @@ jobs:
       run: dotnet build --no-restore WebStore.slnx
     - name: Test
       run: dotnet test --no-build --verbosity normal WebStore.slnx
+      env:          
+          ConnectionStrings__DefaultConnection: "Server=localhost,1433;Database=TestDb;User Id=sa;Password=${{ secrets.MSSQL_SA_PASSWORD }};TrustServerCertificate=True;"
