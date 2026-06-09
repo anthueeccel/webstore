@@ -37,4 +37,4 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal WebStore.slnx
       env:          
-          ConnectionStrings__DefaultConnection: "Server=localhost,1433;Database=TestDb;User Id=sa;Password=${{ secrets.MSSQL_SA_PASSWORD }};TrustServerCertificate=True;"
+          ConnectionStrings__DefaultConnection: "Server=localhost,1433;Database=master;User Id=sa;Password=${{ secrets.MSSQL_SA_PASSWORD }};TrustServerCertificate=True;"
