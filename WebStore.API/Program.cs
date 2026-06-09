@@ -29,9 +29,11 @@ builder.Services.AddAuthorization();
 var app = builder.Build();
 
 // Seed the database
-app.Services.CreateScope().ServiceProvider.GetRequiredService<IWebStoreSeeder>()
-    .Seed()
-    .Wait();
+await app.Services
+            .CreateScope()
+            .ServiceProvider
+            .GetRequiredService<IWebStoreSeeder>()
+            .Seed();
 
 app.UseHttpsRedirection();
 
