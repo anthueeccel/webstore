@@ -19,8 +19,5 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
-  },  
-  "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost,1433;Database=sql_dev;User Id=sa;Password=<dbPassword>;TrustServerCertificate=True;"
-  }
+  }     
 }
