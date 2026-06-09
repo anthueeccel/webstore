@@ -10,7 +10,7 @@ namespace WebStore.Infrastructure.Extensions
     {
         public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("WebStoreLocalDb");
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<WebStoreDbContext>(options =>
                 options.UseSqlServer(connectionString, b => b.MigrationsAssembly("WebStore.Infrastructure"))
             );
