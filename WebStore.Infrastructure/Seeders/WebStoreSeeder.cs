@@ -1,4 +1,5 @@
-﻿using WebStore.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using WebStore.Domain.Entities;
 using WebStore.Infrastructure.Persistence;
 
 namespace WebStore.Infrastructure.Seeders
@@ -15,6 +16,8 @@ namespace WebStore.Infrastructure.Seeders
 
         public async Task Seed()
         {
+            await _dbContext.Database.MigrateAsync();
+
             if (await _dbContext.Database.CanConnectAsync())
             {
                 if (!_dbContext.WebStores.Any())
