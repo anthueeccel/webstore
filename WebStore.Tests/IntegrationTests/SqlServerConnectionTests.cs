@@ -6,6 +6,7 @@ using WebStore.Infrastructure.Persistence;
 
 namespace WebStore.Tests.IntegrationTests;
 
+[Trait("Category", "Integration")]
 public class SqlServerConnectionTests
 {
     private static readonly IConfiguration Configuration;
