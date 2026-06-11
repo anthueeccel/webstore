@@ -62,3 +62,5 @@ GetAllBrandsEndpoint.MapEndpoint(app);
 GetBrandByIdEndpoint.MapEndpoint(app);
 
 app.Run();
+
+public partial class Program { }

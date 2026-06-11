@@ -14,12 +14,12 @@ namespace WebStore.API.Features.Category.GetCategoryById
             _logger = loggerFactory.CreateLogger(GetType().Name);
         }
 
-        public async Task<GetCategoryByIdResponse?> HandleAsync(Guid id)
+        public async Task<GetCategoryByIdResponse?> HandleAsync(GetCategoryByIdRequest request)
         {
-            var category = await _context.Categories.FindAsync(id);
+            var category = await _context.Categories.FindAsync(request.Id);
             if (category is null)
             {
-                _logger.LogWarning("Category {CategoryId} not found.", id);
+                _logger.LogWarning("Category {CategoryId} not found.", request.Id);
                 return null;
             }
 

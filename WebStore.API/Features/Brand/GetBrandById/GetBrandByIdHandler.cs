@@ -14,12 +14,12 @@ namespace WebStore.API.Features.Brand.GetBrandById
             _logger = loggerFactory.CreateLogger(GetType().Name);
         }
 
-        public async Task<GetBrandByIdResponse?> HandleAsync(Guid id)
+        public async Task<GetBrandByIdResponse?> HandleAsync(GetBrandByIdRequest request)
         {
-            var brand = await _context.Brands.FindAsync(id);
+            var brand = await _context.Brands.FindAsync(request.Id);
             if (brand is null)
             {
-                _logger.LogWarning("Brand {BrandId} not found.", id);
+                _logger.LogWarning("Brand {BrandId} not found.", request.Id);
                 return null;
             }
 
