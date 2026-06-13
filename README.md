@@ -2,7 +2,52 @@
 
 ## Overview
 
-WebStore Management Tool (back-end).
+WebStore Management Tool (back-end) — a study project focused on **CI/CD with GitHub Actions** and **Spec-Driven Development (AI-Assisted)**.
+
+### Spec-Driven Development (AI-Assisted)
+
+The API is developed using a **spec-first** approach. **Bruno API collections** (`WebStore-Bruno.zip`) serve as the contract and specification for each endpoint. Before writing implementation code, endpoints are defined, tested, and validated through Bruno — ensuring the API contract is clear and testable from the start.
+
+AI assists throughout the workflow by:
+
+- Generating and evolving API specs alongside the code.
+- Validating that implementations match the defined contract.
+- Accelerating test writing and edge-case discovery based on the spec.
+
+This approach keeps the API contract as the single source of truth, making development more predictable and collaboration more effective.
+
+### CI/CD with GitHub Actions
+
+The project uses a unified CI/CD pipeline defined in `.github/workflows/dotnet.yml`, triggered on every push or pull request to `main`.
+
+#### Continuous Integration (Current)
+
+| Stage                 | Description                                                                      |
+| --------------------- | -------------------------------------------------------------------------------- |
+| **Build**             | Restore dependencies and build the solution                                      |
+| **Unit Tests**        | Run unit tests (filter: `Category=Unit`)                                         |
+| **Integration Tests** | Run against a SQL Server 2022 container (filter: `Category=Integration`)         |
+| **E2E Tests**         | Run end-to-end tests against the containerized database (filter: `Category=E2E`) |
+
+#### Continuous Deployment (Study in Progress)
+
+The next step is extending the pipeline to deploy the application to **Azure App Service**. This includes:
+
+- Publishing the .NET build as a deployment artifact.
+- Deploying to Azure App Service using GitHub Actions (`azure/webapps-deploy` or `az webapp deploy`).
+
+### Technology Stack
+
+- **.NET 10** — ASP.NET Core Minimal API
+- **Entity Framework Core** — ORM and data access
+- **FluentValidation** — Input validation
+- **Github Actions** — CI/CD
+- **Bruno** — Endpoint testing
+- **Azure App Service** — Deployment target (next step)
+
+---
+
+## Architecture
 
 ### Vertical Slice Architecture
 
@@ -36,31 +81,34 @@ This API follows the principles of **Vertical Slice Architecture**, organizing c
     │       ├── GetAllBrands/
     │       └── GetBrandById/
     └── Shared/
-        ├── Validators/ (AddressValidator)
-        └── Extensions/ (DI + endpoint registration)
+        ├── Dtos/
+        ├── Extensions/ (DI + endpoint registration)
+        └── Validators/ (AddressValidator)
 ├── Domain/
-│   ├── Entities/
-│   └── Repositories/ (interfaces)
+│   └── Entities/
+│       ├── Address.cs
+│       ├── BaseEntity.cs
+│       ├── Brand.cs
+│       ├── Category.cs
+│       ├── Product.cs
+│       └── WebStore.cs
 ├── Infrastructure/
 │   ├── Extensions/
 │   ├── Migrations/
 │   ├── Persistence/
-│   ├── Repositories/
 │   └── Seeders/
 └── Tests/
-    └── Features/
-        └── WebStore/
+    ├── Features/
+    │   ├── Brand/
+    │   ├── Category/
+    │   ├── Product/
+    │   └── WebStore/
+    └── IntegrationTests/
 ```
 
 #### Why does this matter?
 
 Modularity and the separation of concerns ensure that the code is easy to understand, test, and expand, making the system ready to evolve as business needs grow. Vertical Slices in particular make it easy to navigate the codebase and add new features without touching unrelated code.
-
-## Technologies
-
-- .NET 10
-- Entity Framework
-- FluentValidation
 
 #### Main Entities
 
@@ -76,17 +124,12 @@ The Entity Model maps to database tables and defines how data is organized, incl
 
 A DTO (Data Transfer Object) is a simple object used to transfer data between application layers. It typically holds data without business logic, acting as a container to pass information efficiently.
 
-- `WebStoreDto` - fetch data for http get endpoint
-- `ProductDto` - fetch data for http get endpoint
-- `WebStoreCreateDto` - Webstore posting endpoint
-- `ProductCreateDto` - Product posting endpoint
-- `WebStoreUpdateDto` - Webstore updating endpoint
-- `ProductUpdateDto` - Product updating endpoint
-
 ## Tools
 
-- Github Actions to perform validations and run the tests.
-- Visual Studio 2026
+- **GitHub Actions** — CI/CD pipeline (build, test, and deploy)
+- **Azure App Service** — Cloud deployment target
+- **Bruno** — Endpoint testing
+- **VS Code** — using Cline extension as AI assistant for Spec-Driven Development
 
 ## Helpful CLI
 
