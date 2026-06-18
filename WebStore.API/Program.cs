@@ -15,6 +15,7 @@ using WebStore.API.Features.Category.GetAllCategories;
 using WebStore.API.Features.Category.GetCategoryById;
 using WebStore.API.Features.Brand.GetAllBrands;
 using WebStore.API.Features.Brand.GetBrandById;
+using WebStore.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,12 +29,22 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-// Seed the database
-await app.Services
-            .CreateScope()
-            .ServiceProvider
-            .GetRequiredService<IWebStoreSeeder>()
-            .Seed();
+// Apply pending migrations and seed the database on startup
+try
+{
+    using var scope = app.Services.CreateScope();
+    var dbContext = scope.ServiceProvider.GetRequiredService<WebStoreDbContext>();
+    await dbContext.Database.MigrateAsync();
+
+    var seeder = scope.ServiceProvider.GetRequiredService<IWebStoreSeeder>();
+    await seeder.Seed();
+}
+catch (Exception ex)
+{
+    var logger = app.Services.GetRequiredService<ILogger<Program>>();
+    logger.LogError(ex, "An error occurred while applying migrations or seeding the database.");
+    throw;
+}
 
 app.UseHttpsRedirection();
 
