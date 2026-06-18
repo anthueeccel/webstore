@@ -12,7 +12,7 @@ namespace WebStore.Infrastructure.Extensions
         {
             var connectionString = configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<WebStoreDbContext>(options =>
-                options.UseSqlServer(connectionString, b => b.MigrationsAssembly("WebStore.Infrastructure"))
+                options.UseNpgsql(connectionString, b => b.MigrationsAssembly("WebStore.Infrastructure"))
             );
 
             services.AddScoped<IWebStoreSeeder, WebStoreSeeder>();

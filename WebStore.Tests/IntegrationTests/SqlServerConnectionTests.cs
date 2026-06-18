@@ -25,7 +25,7 @@ public class SqlServerConnectionTests
         var connectionString = Configuration.GetConnectionString("DefaultConnection");
 
         // Allow override via environment variable CI/CD
-        var envConnectionString = Environment.GetEnvironmentVariable("SQLSERVER_CONNECTION_STRING");
+        var envConnectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
         if (!string.IsNullOrEmpty(envConnectionString))
             connectionString = envConnectionString;
 
@@ -34,11 +34,11 @@ public class SqlServerConnectionTests
     }
 
     [Fact]
-    public async Task OpenSqlConnection_ShouldSucceed()
+    public async Task OpenDbConnection_ShouldSucceed()
     {
         // Arrange
         var connectionString = GetConnectionString();
-        await using var connection = new SqlConnection(connectionString);
+        await using var connection = new Npgsql.NpgsqlConnection(connectionString);
 
         // Act
         await connection.OpenAsync();
@@ -53,7 +53,7 @@ public class SqlServerConnectionTests
         // Arrange
         var connectionString = GetConnectionString();
         var options = new DbContextOptionsBuilder<WebStoreDbContext>()
-            .UseSqlServer(connectionString)
+            .UseNpgsql(connectionString)
             .Options;
 
         await using var context = new WebStoreDbContext(options);
