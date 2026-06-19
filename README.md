@@ -1,8 +1,8 @@
-![.Net](http://img.shields.io/badge/-v10.0-008999?style=flat-square&logo=.net&logoColor=ffffff) ![last_commit](https://img.shields.io/github/last-commit/anthueeccel/webstore) ![license](https://img.shields.io/github/license/anthueeccel/webstore)
+![.Net](http://img.shields.io/badge/-v10.0-008999?style=flat-square&logo=.net&logoColor=ffffff) [![build-test-and-deploy](https://github.com/anthueeccel/webstore/actions/workflows/dotnet.yml/badge.svg)](https://github.com/anthueeccel/webstore/actions/workflows/dotnet.yml) ![last_commit](https://img.shields.io/github/last-commit/anthueeccel/webstore) ![license](https://img.shields.io/github/license/anthueeccel/webstore)
 
 ## Overview
 
-WebStore Management Tool (back-end) — a study project focused on **CI/CD with GitHub Actions** and **Spec-Driven Development (AI-Assisted)**.
+WebStore Management Tool (back-end) — a study project focused on **CI/CD with GitHub Actions (build-test-deploy)** and **Spec-Driven Development (AI-Assisted)**.
 
 ### Spec-Driven Development (AI-Assisted)
 
@@ -18,9 +18,9 @@ This approach keeps the API contract as the single source of truth, making devel
 
 ### CI/CD with GitHub Actions
 
-The project uses a unified CI/CD pipeline defined in `.github/workflows/dotnet.yml`, triggered on every push or pull request to `main`.
+The project uses a unified CI/CD pipeline defined in `.github/workflows/dotnet.yml` (Terraform), triggered on every pull request to `main`.
 
-#### Continuous Integration (Current)
+#### Continuous Integration & Continous Delivery Details
 
 | Stage                 | Description                                                                      |
 | --------------------- | -------------------------------------------------------------------------------- |
@@ -28,22 +28,19 @@ The project uses a unified CI/CD pipeline defined in `.github/workflows/dotnet.y
 | **Unit Tests**        | Run unit tests (filter: `Category=Unit`)                                         |
 | **Integration Tests** | Run against a SQL Server 2022 container (filter: `Category=Integration`)         |
 | **E2E Tests**         | Run end-to-end tests against the containerized database (filter: `Category=E2E`) |
+| **Create Artifact**   | Publish the .NET build as a deployment artifact                                  |
+| **Deploy to Azure**   | Deploy the application to **Azure App Service**                                  |
 
-#### Continuous Deployment (Study in Progress)
-
-The next step is extending the pipeline to deploy the application to **Azure App Service**. This includes:
-
-- Publishing the .NET build as a deployment artifact.
-- Deploying to Azure App Service using GitHub Actions (`azure/webapps-deploy` or `az webapp deploy`).
 
 ### Technology Stack
 
 - **.NET 10** — ASP.NET Core Minimal API
 - **Entity Framework Core** — ORM and data access
 - **FluentValidation** — Input validation
+- **PostgreSQL** — database 
 - **Github Actions** — CI/CD
 - **Bruno** — Endpoint testing
-- **Azure App Service** — Deployment target (next step)
+- **Azure App Service** — Deployment target
 
 ---
 
@@ -130,8 +127,11 @@ A DTO (Data Transfer Object) is a simple object used to transfer data between ap
 - **Azure App Service** — Cloud deployment target
 - **Bruno** — Endpoint testing
 - **VS Code** — using Cline extension as AI assistant for Spec-Driven Development
+- **Neon** — After deployment database hosted in [Neon](https://neon.com/)
 
 ## Helpful CLI
 
 - Add nuget package: `dotnet add package <package-name>`
 - Create migrations: `dotnet ef migrations add <name>`
+- Create Db in Docker: `docker run --name webstore-postgres-local -e POSTGRES_DB=<DbName> -e POSTGRES_USER=<DbAdminUser> -e POSTGRES_PASSWORD=<DbPassword> -p 5432:5432 -d postgres:16-alpine`
+- Create Github secret for Azure deployment: `az ad sp create-for-rbac --name "GitHub-Actions-App-Deploy" --role contributor --scopes /subscriptions/<YourAppId>/resourceGroups/<ResourceGroupName> --json-auth`
